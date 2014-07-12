@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+    <title>Ejemplos usando HTML</title>
+
+    <script type="text/javascript" src="javascripts/jquery-2.1.0.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#mostrar').click(function () {
+                var opts = '';
+                $(':checkbox').each(function (e) {
+                    if ($(this).is(':checked'))
+                        opts += $(this).attr('value')
+                });
+
+                alert(opts);
+            });
+
+            $("#tooltip1").mouseover(function () {
+                eleOffset = $(this).offset();
+
+                $(this).next().fadeIn("fast").css({
+
+                    left: eleOffset.left + $(this).outerWidth(),
+                    top: eleOffset.top
+
+                });
+            }).mouseout(function () {
+                $(this).next().hide();
+            });
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+<div>
+    <p>
+
+        <input type="checkbox" name="transporte" value="1">Coche
+        <br>
+        <input type="checkbox" name="transporte" value="2">Avion
+        <br>
+        <input type="checkbox" name="transporte" value="3">Tren
+
+    </p>
+
+    <button id="mostrar"> Mostrar</button>
+</div>
+
+<a href="#" id="tooltip1">Ejemplo basico de Tooltip</a>
+
+<div class="tooltip" style="display: none; left: 239px; top: 18px; background: yellow">
+    <p>
+        Contenido del Tooltip 1
+    </p>
+    <p>
+        Mas contenido
+    </p>
+</div>
+
+</body>
+
+</html>

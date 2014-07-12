@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+    <title>Usando el API REST</title>
+
+    <script type="text/javascript" src="javascripts/jquery-2.1.0.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            function buildTable(data) {
+                $("tbody").html("");
+                for (var i = 0; i < data.length; i++) {
+                    var row = $("<tr></tr>");
+                    row.append($("<td></td>").html(data[i]['nombre']));
+
+                    row.append( $("<td></td>").html(data[i].edad));
+                    $("tbody").append(row);
+                }
+            }
+
+            $('#mostrar').click(function () {
+
+                $.get('/nombres', null, function (data) {
+//                    alert(data[1].name)
+                    buildTable(data);
+                });
+
+                return false;
+            });
+
+            $('#add').click(function () {
+                var params = {nombre: $('#nombre').val(), edad: parseInt($('#edad').val())};
+                $.post('/nombres', params, function (data) {
+                    buildTable(data)
+                });
+                return false;
+            });
+
+        });
+
+    </script>
+
+    <style> td {
+        border: .5px dotted black;
+    } </style>
+
+</head>
+
+<body>
+
+
+<div>
+    Nombre: <input type="text" id="nombre"/><br/>
+    Edad: <input type="text" id="edad"/><br/>
+    <button id="add">Añadir persona</button>
+</div>
+
+<div>
+    <table id="listado">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+        </tr>
+        <thead>
+
+        <tbody></tbody>
+    </table>
+    <button id="mostrar">Listar</button>
+</div>
+
+
+</body>
+</html>
